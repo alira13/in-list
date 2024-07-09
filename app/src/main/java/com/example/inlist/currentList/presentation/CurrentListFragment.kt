@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.inlist.databinding.FragmentCurrentListBinding
@@ -12,6 +11,10 @@ import com.example.inlist.databinding.FragmentCurrentListBinding
 class CurrentListFragment : Fragment() {
 
     private var _binding: FragmentCurrentListBinding? = null
+
+    private var listAdapter = ListAdapter()
+
+    private var currentListViewModel: CurrentListViewModel? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,17 +25,19 @@ class CurrentListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val currentListViewModel =
-            ViewModelProvider(this).get(CurrentListViewModel::class.java)
-
         _binding = FragmentCurrentListBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        currentListViewModel = ViewModelProvider(this).get(CurrentListViewModel::class.java)
+        return binding.root
+    }
 
-        val textView: TextView = binding.textCurrentList
-        currentListViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.activeItemsRv.adapter = listAdapter
+
+        currentListViewModel!!.currentList.observe(viewLifecycleOwner) {
+            listAdapter.listItems = it.activeItems.toMutableList()
         }
-        return root
     }
 
     override fun onDestroyView() {
