@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">InList</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_all_lists">Все списки</string>
+    <string name="title_current_list">Имя текущего списка</string>
+    <string name="title_settings">Настройки</string>
 </resources>

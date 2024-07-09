@@ -1,4 +1,4 @@
-package com.example.inlist.ui.notifications
+package com.example.inlist.ui.currentList
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.inlist.databinding.FragmentNotificationsBinding
+import com.example.inlist.databinding.FragmentCurrentListBinding
 
-class NotificationsFragment : Fragment() {
+class CurrentListFragment : Fragment() {
 
-    private var _binding: FragmentNotificationsBinding? = null
+    private var _binding: FragmentCurrentListBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,14 +22,14 @@ class NotificationsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(NotificationsViewModel::class.java)
+        val currentListViewModel =
+            ViewModelProvider(this).get(CurrentListViewModel::class.java)
 
-        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+        _binding = FragmentCurrentListBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.textCurrentList
+        currentListViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root

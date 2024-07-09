@@ -1,13 +1,13 @@
-package com.example.inlist.ui.dashboard
+package com.example.inlist.ui.currentList
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DashboardViewModel : ViewModel() {
+class CurrentListViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
+        value = "Это фрагмент текущего списка"
     }
     val text: LiveData<String> = _text
 }
