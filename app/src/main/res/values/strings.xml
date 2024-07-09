@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">InList</string>
     <string name="title_all_lists">Все списки</string>
-    <string name="title_current_list">Имя текущего списка</string>
+    <string name="title_current_list">Список</string>
     <string name="title_settings">Настройки</string>
+    <string name="add_button_text">Добавить</string>
 </resources>

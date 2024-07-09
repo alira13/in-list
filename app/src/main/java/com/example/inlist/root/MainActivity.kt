@@ -1,4 +1,4 @@
-package com.example.inlist
+package com.example.inlist.root
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.inlist.R
 import com.example.inlist.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.example.inlist.ui.allLists
+package com.example.inlist.allLists.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater

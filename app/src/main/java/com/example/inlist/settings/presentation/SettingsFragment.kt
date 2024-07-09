@@ -1,4 +1,4 @@
-package com.example.inlist.ui.settings
+package com.example.inlist.settings.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater

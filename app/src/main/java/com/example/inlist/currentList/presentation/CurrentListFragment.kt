@@ -1,4 +1,4 @@
-package com.example.inlist.ui.currentList
+package com.example.inlist.currentList.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
