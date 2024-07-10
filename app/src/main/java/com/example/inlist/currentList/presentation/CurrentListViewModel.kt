@@ -3,27 +3,44 @@ package com.example.inlist.currentList.presentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.inlist.currentList.presentation.models.CurrentList
-import com.example.inlist.currentList.presentation.models.ListItem
+import com.example.inlist.currentList.domain.models.CurrentList
+import com.example.inlist.currentList.domain.models.ListItem
 
-class CurrentListViewModel : ViewModel() {
+class CurrentListViewModel() : ViewModel() {
 
-    private val _currentList = MutableLiveData<CurrentList>()
-    val currentList: LiveData<CurrentList> = _currentList
+    private val _state = MutableLiveData<CurrentList>()
+    val state: LiveData<CurrentList> = _state
 
+    private var currentList: CurrentList? = null
     init {
-        val list = getCurrentList()
-        _currentList.postValue(list)
+        getCurrentList()
+        _state.postValue(currentList!!)
     }
 
-    private fun getCurrentList():CurrentList {
+    private fun getCurrentList(): CurrentList {
         val items = listOf(
             ListItem("Молоко"),
             ListItem("Чай"),
             ListItem("Кофе"),
             ListItem("Хлеб")
         )
-        val list = CurrentList("Список 1", items)
-        return list
+        currentList = CurrentList("Список 1", items)
+        return currentList!!
+    }
+
+    fun addToList(item: ListItem) {
+        val items = currentList!!.activeItems.toMutableList()
+        items.add(item)
+        val list = CurrentList(currentList!!.name, items)
+        currentList = list
+        _state.postValue(currentList!!)
+    }
+
+    fun deleteFromList(item: ListItem) {
+        val items = currentList!!.activeItems.toMutableList()
+        items.remove(item)
+        val list = CurrentList(currentList!!.name, items)
+        currentList = list
+        _state.postValue(currentList!!)
     }
 }

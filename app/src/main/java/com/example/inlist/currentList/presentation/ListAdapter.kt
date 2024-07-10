@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.inlist.R
-import com.example.inlist.currentList.presentation.models.ListItem
+import com.example.inlist.currentList.domain.models.ListItem
 
 class ListViewHolder(itemView: View) : ViewHolder(itemView) {
     private val name: TextView = itemView.findViewById(R.id.list_item_tv)

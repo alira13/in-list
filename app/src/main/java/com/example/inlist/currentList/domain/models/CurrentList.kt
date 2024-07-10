@@ -1,4 +1,4 @@
-package com.example.inlist.currentList.presentation.models
+package com.example.inlist.currentList.domain.models
 
 data class CurrentList(
     val name: String,
