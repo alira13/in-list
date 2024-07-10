@@ -46,8 +46,6 @@ class CurrentListFragment : Fragment() {
             listAdapter.listItems = it.activeItems.toMutableList()
         }
 
-        var listItem = ListItem("Спагетти")
-
         binding.addItemEt.doAfterTextChanged { text: Editable? ->
             val inputMethodManager =
                 activity?.getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE) as? InputMethodManager
@@ -67,6 +65,7 @@ class CurrentListFragment : Fragment() {
             if (listItem.name.isNotEmpty())
                 currentListViewModel!!.addToList(listItem)
             binding.addItemEt.setText("")
+            listItem = ListItem("")
         }
     }
 
