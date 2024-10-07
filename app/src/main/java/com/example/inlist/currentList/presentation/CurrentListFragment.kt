@@ -48,8 +48,8 @@ class CurrentListFragment : Fragment() {
         }
 
         binding.addItemBtn.setOnClickListener {
-            showKeyboard()
             showEditText()
+            showKeyboard()
         }
 
         binding.addItemEt.setOnEditorActionListener { _, actionId, _ ->
