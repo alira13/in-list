@@ -22,6 +22,7 @@
 
     <EditText
         android:id="@+id/add_item_et"
+        android:labelFor="@+id/add_item_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textCapSentences"
@@ -29,7 +30,10 @@
         android:autofillHints="name"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        android:visibility="gone"
+        android:imeOptions="actionDone"
         app:layout_constraintTop_toBottomOf="@id/active_items_rv" />
+
     <Button
         android:id="@+id/add_item_btn"
         android:layout_width="wrap_content"
