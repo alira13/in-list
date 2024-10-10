@@ -2,13 +2,18 @@ package com.example.inlist.currentList.presentation
 
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
+import android.widget.AdapterView.OnItemClickListener
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.inlist.R
 import com.example.inlist.currentList.domain.models.ListItem
 
+interface ItemClickListener {
+    fun onClick(listItem: ListItem)
+}
 class ListViewHolder(itemView: View) : ViewHolder(itemView) {
     private val name: TextView = itemView.findViewById(R.id.list_item_tv)
     fun bind(listItem: ListItem) {
@@ -16,7 +21,7 @@ class ListViewHolder(itemView: View) : ViewHolder(itemView) {
     }
 }
 
-class ListAdapter() : Adapter<ListViewHolder>() {
+class ListAdapter(private val itemClickListener: ItemClickListener) : Adapter<ListViewHolder>() {
     var listItems: MutableList<ListItem> = mutableListOf()
         set(value) {
             field = value
@@ -36,5 +41,8 @@ class ListAdapter() : Adapter<ListViewHolder>() {
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         holder.bind(listItems[position])
+        holder.itemView.setOnClickListener {
+            itemClickListener.onClick(listItems[position])
+        }
     }
 }

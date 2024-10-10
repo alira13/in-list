@@ -14,11 +14,13 @@ import com.example.inlist.currentList.domain.models.ListItem
 import com.example.inlist.databinding.FragmentCurrentListBinding
 
 
-class CurrentListFragment : Fragment() {
+class CurrentListFragment : Fragment(), ItemClickListener {
 
     private var _binding: FragmentCurrentListBinding? = null
 
-    private var listAdapter = ListAdapter()
+    private var activeListAdapter = ListAdapter(this)
+
+    private var deletedListAdapter = ListAdapter(this)
 
     private var currentListViewModel: CurrentListViewModel? = null
 
@@ -41,10 +43,12 @@ class CurrentListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.activeItemsRv.adapter = listAdapter
+        binding.activeItemsRv.adapter = activeListAdapter
+        binding.deletedItemsRv.adapter = deletedListAdapter
 
         currentListViewModel!!.state.observe(viewLifecycleOwner) {
-            listAdapter.listItems = it.activeItems.toMutableList()
+            activeListAdapter.listItems = it.activeItems.toMutableList()
+            deletedListAdapter.listItems = it.deletedItems.toMutableList()
         }
 
         binding.addItemBtn.setOnClickListener {
@@ -68,6 +72,18 @@ class CurrentListFragment : Fragment() {
             currentListViewModel!!.addToList(listItem!!)
             listItem = null
         }
+    }
+
+    private fun deleteItem(name: String) {
+        listItem = ListItem(name)
+        currentListViewModel!!.deleteFromList(listItem!!)
+        listItem = null
+    }
+
+    private fun restoreItem(name: String) {
+        listItem = ListItem(name)
+        currentListViewModel!!.restoreItem(listItem!!)
+        listItem = null
     }
 
     private fun showKeyboard() {
@@ -106,5 +122,11 @@ class CurrentListFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onClick(listItem: ListItem) {
+        if (activeListAdapter.listItems.contains(listItem))
+            deleteItem(listItem.name)
+        else restoreItem(listItem.name)
     }
 }

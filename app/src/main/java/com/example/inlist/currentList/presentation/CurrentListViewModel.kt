@@ -18,28 +18,45 @@ class CurrentListViewModel() : ViewModel() {
     }
 
     private fun getCurrentList(): CurrentList {
-        val items = listOf(
+        val activeItems = listOf(
             ListItem("Молоко"),
             ListItem("Чай"),
             ListItem("Кофе"),
             ListItem("Хлеб")
         )
-        currentList = CurrentList("Список 1", items)
+
+        val deletedItems = listOf(
+            ListItem("Шампунь"),
+            ListItem("Мыло"),
+        )
+        currentList = CurrentList("Список 1", activeItems, deletedItems)
         return currentList!!
     }
 
     fun addToList(item: ListItem) {
         val items = currentList!!.activeItems.toMutableList()
-        items.add(item)
-        val list = CurrentList(currentList!!.name, items)
+        items.add(0, item)
+        val list = CurrentList(currentList!!.name, items, currentList!!.deletedItems)
         currentList = list
         _state.postValue(currentList!!)
     }
 
     fun deleteFromList(item: ListItem) {
-        val items = currentList!!.activeItems.toMutableList()
-        items.remove(item)
-        val list = CurrentList(currentList!!.name, items)
+        val activeItems = currentList!!.activeItems.toMutableList()
+        val deletedItems = currentList!!.deletedItems.toMutableList()
+        activeItems.remove(item)
+        deletedItems.add(0, item)
+        val list = CurrentList(currentList!!.name, activeItems, deletedItems)
+        currentList = list
+        _state.postValue(currentList!!)
+    }
+
+    fun restoreItem(item: ListItem) {
+        val activeItems = currentList!!.activeItems.toMutableList()
+        val deletedItems = currentList!!.deletedItems.toMutableList()
+        activeItems.add(0, item)
+        deletedItems.remove(item)
+        val list = CurrentList(currentList!!.name, activeItems, deletedItems)
         currentList = list
         _state.postValue(currentList!!)
     }
