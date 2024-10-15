@@ -28,8 +28,6 @@ class CurrentListFragment : Fragment(), ItemClickListener {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private var listItem: ListItem? = null
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -54,37 +52,19 @@ class CurrentListFragment : Fragment(), ItemClickListener {
         binding.addItemBtn.setOnClickListener {
             showEditText()
             showKeyboard()
+
         }
 
         binding.addItemEt.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 val name = binding.addItemEt.text.toString()
-                addNewItem(name)
+                currentListViewModel!!.addItem(name)
                 hideKeyboard()
             }
             true
         }
     }
 
-    private fun addNewItem(name: String) {
-        if (name.isNotEmpty()) {
-            listItem = ListItem(name)
-            currentListViewModel!!.addToList(listItem!!)
-            listItem = null
-        }
-    }
-
-    private fun deleteItem(name: String) {
-        listItem = ListItem(name)
-        currentListViewModel!!.deleteFromList(listItem!!)
-        listItem = null
-    }
-
-    private fun restoreItem(name: String) {
-        listItem = ListItem(name)
-        currentListViewModel!!.restoreItem(listItem!!)
-        listItem = null
-    }
 
     private fun showKeyboard() {
         val inputMethodManager =
@@ -93,6 +73,7 @@ class CurrentListFragment : Fragment(), ItemClickListener {
         inputMethodManager?.showSoftInput(binding.addItemEt, 0)
         //Когда клавиатуру видно, кнопка должна быть скрыта
         binding.addItemBtn.isVisible = false
+        binding.currentListBackgroundV.isVisible = true
     }
 
     private fun hideKeyboard() {
@@ -104,6 +85,7 @@ class CurrentListFragment : Fragment(), ItemClickListener {
         )
         //Показываем кнопку Добавить
         binding.addItemBtn.isVisible = true
+        binding.currentListBackgroundV.isVisible = false
         hideEditText()
     }
 
@@ -126,7 +108,7 @@ class CurrentListFragment : Fragment(), ItemClickListener {
 
     override fun onClick(listItem: ListItem) {
         if (activeListAdapter.listItems.contains(listItem))
-            deleteItem(listItem.name)
-        else restoreItem(listItem.name)
+            currentListViewModel!!.deleteItem(listItem.name)
+        else currentListViewModel!!.restoreItem(listItem.name)
     }
 }

@@ -33,15 +33,19 @@ class CurrentListViewModel() : ViewModel() {
         return currentList!!
     }
 
-    fun addToList(item: ListItem) {
-        val items = currentList!!.activeItems.toMutableList()
-        items.add(0, item)
-        val list = CurrentList(currentList!!.name, items, currentList!!.deletedItems)
-        currentList = list
-        _state.postValue(currentList!!)
+    fun addItem(name: String) {
+        if (name.isNotEmpty()) {
+            val item = ListItem(name)
+            val items = currentList!!.activeItems.toMutableList()
+            items.add(0, item)
+            val list = CurrentList(currentList!!.name, items, currentList!!.deletedItems)
+            currentList = list
+            _state.postValue(currentList!!)
+        }
     }
 
-    fun deleteFromList(item: ListItem) {
+    fun deleteItem(name: String) {
+        val item = ListItem(name)
         val activeItems = currentList!!.activeItems.toMutableList()
         val deletedItems = currentList!!.deletedItems.toMutableList()
         activeItems.remove(item)
@@ -51,7 +55,8 @@ class CurrentListViewModel() : ViewModel() {
         _state.postValue(currentList!!)
     }
 
-    fun restoreItem(item: ListItem) {
+    fun restoreItem(name: String) {
+        val item = ListItem(name)
         val activeItems = currentList!!.activeItems.toMutableList()
         val deletedItems = currentList!!.deletedItems.toMutableList()
         activeItems.add(0, item)
