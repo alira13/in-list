@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:background="#99000000"
         android:visibility="gone" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/active_items_rv"
         android:layout_width="match_parent"

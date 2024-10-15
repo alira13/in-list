@@ -52,7 +52,6 @@ class CurrentListFragment : Fragment(), ItemClickListener {
         binding.addItemBtn.setOnClickListener {
             showEditText()
             showKeyboard()
-
         }
 
         binding.addItemEt.setOnEditorActionListener { _, actionId, _ ->
@@ -64,7 +63,6 @@ class CurrentListFragment : Fragment(), ItemClickListener {
             true
         }
     }
-
 
     private fun showKeyboard() {
         val inputMethodManager =

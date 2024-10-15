@@ -1,34 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="16dp"
     android:orientation="vertical"
+    android:padding="16dp"
     tools:context=".settings.presentation.SettingsFragment">
 
     <TextView
         android:id="@+id/settings_account_tv"
         style="@style/SettingsMenuTv"
-        android:text="@string/account_settings" />
+        android:text="@string/account_settings"
+        app:drawableEndCompat="@drawable/ic_settings" />
 
-    <TextView
-        android:id="@+id/settings_theme_tv"
-        style="@style/SettingsMenuTv"
-        android:text="@string/theme_settings" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/settings_theme_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/dark_theme"
+            android:textSize="16sp" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:checked="true"
+            app:thumbTint="?attr/colorPrimary"
+            app:trackTint="?attr/colorPrimary" />
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/settings_support_tv"
         style="@style/SettingsMenuTv"
-        android:text="@string/support" />
+        android:text="@string/support"
+        app:drawableEndCompat="@drawable/ic_support" />
 
     <TextView
         android:id="@+id/settings_share"
         style="@style/SettingsMenuTv"
-        android:text="@string/share_app" />
+        android:text="@string/share_app"
+        app:drawableEndCompat="@drawable/ic_share" />
 
     <TextView
         android:id="@+id/settings_about_tv"
         style="@style/SettingsMenuTv"
-        android:text="@string/about_app" />
+        android:text="@string/about_app"
+        app:drawableEndCompat="@drawable/ic_arrow_forward" />
 </LinearLayout>
