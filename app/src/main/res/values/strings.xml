@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">InList</string>
-    <string name="title_all_lists">Все списки</string>
-    <string name="title_current_list">Список</string>
-    <string name="title_settings">Настройки</string>
-    <string name="add_button_text">Добавить</string>
-    <string name="account_settings">Настройки аккаунта</string>
-    <string name="dark_theme">Темная тема</string>
-    <string name="support">Написать в поддержку</string>
-    <string name="share_app">Поделиться приложением</string>
-    <string name="about_app">О приложении</string>
+    <string name="app_name" translatable="false">InList</string>
+    <string name="title_all_lists">All lists</string>
+    <string name="title_current_list">List</string>
+    <string name="title_settings">Settings</string>
+    <string name="btn_add">Add</string>
+    <string name="lbl_account_settings">Account settings</string>
+    <string name="lbl_dark_theme">Dark theme</string>
+    <string name="lbl_support">Support</string>
+    <string name="lbl_share_app">Share App</string>
+    <string name="lbl_about_app">About</string>
 </resources>

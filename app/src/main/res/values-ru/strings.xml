@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_all_lists">Все списки</string>
+    <string name="title_current_list">Список</string>
+    <string name="title_settings">Настройки</string>
+    <string name="btn_add">Добавить</string>
+    <string name="lbl_account_settings">Настройки аккаунта</string>
+    <string name="lbl_dark_theme">Темная тема</string>
+    <string name="lbl_support">Написать в поддержку</string>
+    <string name="lbl_share_app">Поделиться приложением</string>
+    <string name="lbl_about_app">О приложении</string>
+</resources>
