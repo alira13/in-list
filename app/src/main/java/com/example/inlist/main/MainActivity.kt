@@ -1,4 +1,4 @@
-package com.example.inlist.root
+package com.example.inlist.main
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_all_lists, R.id.navigation_current_list, R.id.navigation_settings
+                R.id.navigation_current_list, R.id.navigation_settings
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

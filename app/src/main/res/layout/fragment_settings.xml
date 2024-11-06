@@ -12,7 +12,8 @@
         android:id="@+id/settings_account_tv"
         style="@style/SettingsMenuTv"
         android:text="@string/lbl_account_settings"
-        app:drawableEndCompat="@drawable/ic_settings" />
+        app:drawableEndCompat="@drawable/ic_settings"
+        android:foreground="?attr/selectableItemBackground"/>
 
     <LinearLayout
         android:layout_width="match_parent"

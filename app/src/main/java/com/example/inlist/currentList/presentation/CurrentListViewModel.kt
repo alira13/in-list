@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.inlist.currentList.domain.models.CurrentList
 import com.example.inlist.currentList.domain.models.ListItem
 
-class CurrentListViewModel() : ViewModel() {
+class CurrentListViewModel : ViewModel() {
 
     private val _state = MutableLiveData<CurrentList>()
     val state: LiveData<CurrentList> = _state
@@ -29,7 +29,7 @@ class CurrentListViewModel() : ViewModel() {
             ListItem("Шампунь"),
             ListItem("Мыло"),
         )
-        currentList = CurrentList("Список 1", activeItems, deletedItems)
+        currentList = CurrentList("Мой список", activeItems, deletedItems)
         return currentList!!
     }
 

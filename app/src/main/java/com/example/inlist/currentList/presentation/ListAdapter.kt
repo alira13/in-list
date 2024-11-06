@@ -2,9 +2,7 @@ package com.example.inlist.currentList.presentation
 
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnClickListener
 import android.view.ViewGroup
-import android.widget.AdapterView.OnItemClickListener
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder

@@ -6,12 +6,6 @@
     app:startDestination="@id/navigation_current_list">
 
     <fragment
-        android:id="@+id/navigation_all_lists"
-        android:name="com.example.inlist.allLists.presentation.AllListsFragment"
-        android:label="@string/title_all_lists"
-        tools:layout="@layout/fragment_all_lists" />
-
-    <fragment
         android:id="@+id/navigation_current_list"
         android:name="com.example.inlist.currentList.presentation.CurrentListFragment"
         android:label="@string/title_current_list"
