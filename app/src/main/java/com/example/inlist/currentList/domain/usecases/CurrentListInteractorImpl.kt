@@ -1,6 +1,8 @@
 package com.example.inlist.currentList.domain.usecases
 
-class CurrentListInteractorImpl(private val repository: CurrentListRepository) :
+import javax.inject.Inject
+
+class CurrentListInteractorImpl @Inject constructor(private val repository: CurrentListRepository) :
     CurrentListInteractor {
     override fun method() {
         repository.method()

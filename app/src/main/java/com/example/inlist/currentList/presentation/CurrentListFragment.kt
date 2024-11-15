@@ -1,6 +1,8 @@
 package com.example.inlist.currentList.presentation
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +12,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.inlist.app.App
 import com.example.inlist.currentList.domain.models.ListItem
 import com.example.inlist.databinding.FragmentCurrentListBinding
+import javax.inject.Inject
 
 
 class CurrentListFragment : Fragment(), ItemClickListener {
@@ -22,11 +26,23 @@ class CurrentListFragment : Fragment(), ItemClickListener {
 
     private var deletedListAdapter = ListAdapter(this)
 
-    private var currentListViewModel: CurrentListViewModel? = null
+    @Inject
+    lateinit var viewModelFactory: InListViewModelFactory
+
+    lateinit var currentListViewModel: CurrentListViewModel
+
+    private val component by lazy {
+        (requireActivity().application as App).component
+    }
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,9 +50,12 @@ class CurrentListFragment : Fragment(), ItemClickListener {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCurrentListBinding.inflate(inflater, container, false)
-        currentListViewModel = ViewModelProvider(this).get(CurrentListViewModel::class.java)
+        currentListViewModel =
+            ViewModelProvider(this, viewModelFactory).get(CurrentListViewModel::class.java)
+        Log.d("MY_LOG", "$currentListViewModel")
         return binding.root
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,7 +63,7 @@ class CurrentListFragment : Fragment(), ItemClickListener {
         binding.activeItemsRv.adapter = activeListAdapter
         binding.deletedItemsRv.adapter = deletedListAdapter
 
-        currentListViewModel!!.state.observe(viewLifecycleOwner) {
+        currentListViewModel.state.observe(viewLifecycleOwner) {
             activeListAdapter.listItems = it.activeItems.toMutableList()
             deletedListAdapter.listItems = it.deletedItems.toMutableList()
         }
@@ -57,7 +76,7 @@ class CurrentListFragment : Fragment(), ItemClickListener {
         binding.addItemEt.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 val name = binding.addItemEt.text.toString()
-                currentListViewModel!!.addItem(name)
+                currentListViewModel.addItem(name)
                 hideKeyboard()
             }
             true
@@ -106,7 +125,7 @@ class CurrentListFragment : Fragment(), ItemClickListener {
 
     override fun onClick(listItem: ListItem) {
         if (activeListAdapter.listItems.contains(listItem))
-            currentListViewModel!!.deleteItem(listItem.name)
-        else currentListViewModel!!.restoreItem(listItem.name)
+            currentListViewModel.deleteItem(listItem.name)
+        else currentListViewModel.restoreItem(listItem.name)
     }
 }

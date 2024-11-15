@@ -5,14 +5,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.inlist.currentList.domain.models.CurrentList
 import com.example.inlist.currentList.domain.models.ListItem
+import com.example.inlist.currentList.domain.usecases.CurrentListInteractor
+import javax.inject.Inject
 
-class CurrentListViewModel() : ViewModel() {
+class CurrentListViewModel @Inject constructor(var interactor: CurrentListInteractor) : ViewModel() {
 
     private val _state = MutableLiveData<CurrentList>()
     val state: LiveData<CurrentList> = _state
 
     private var currentList: CurrentList? = null
     init {
+        interactor.method()
         getCurrentList()
         _state.postValue(currentList!!)
     }
