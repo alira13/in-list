@@ -64,8 +64,8 @@ class CurrentListFragment : Fragment(), ItemClickListener {
         binding.deletedItemsRv.adapter = deletedListAdapter
 
         currentListViewModel.state.observe(viewLifecycleOwner) {
-            activeListAdapter.listItems = it.activeItems.toMutableList()
-            deletedListAdapter.listItems = it.deletedItems.toMutableList()
+            activeListAdapter.listItems = it.items.filter { items-> items.isEnabled }.toMutableList()
+            deletedListAdapter.listItems = it.items.filter { items-> !items.isEnabled }.toMutableList()
         }
 
         binding.addItemBtn.setOnClickListener {
@@ -125,7 +125,7 @@ class CurrentListFragment : Fragment(), ItemClickListener {
 
     override fun onClick(listItem: ListItem) {
         if (activeListAdapter.listItems.contains(listItem))
-            currentListViewModel.deleteItem(listItem.name)
-        else currentListViewModel.restoreItem(listItem.name)
+            currentListViewModel.deleteItem(listItem.id)
+        else currentListViewModel.restoreItem(listItem.id)
     }
 }
