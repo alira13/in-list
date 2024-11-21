@@ -18,13 +18,12 @@ import com.example.inlist.databinding.FragmentCurrentListBinding
 import javax.inject.Inject
 
 
-class CurrentListFragment : Fragment(), ItemClickListener {
+class CurrentListFragment : Fragment() {
 
     private var _binding: FragmentCurrentListBinding? = null
 
-    private var activeListAdapter = ListAdapter(this)
-
-    private var deletedListAdapter = ListAdapter(this)
+    private lateinit var activeCurrentListAdapter:CurrentListAdapter
+    private lateinit var deletedCurrentListAdapter:CurrentListAdapter
 
     @Inject
     lateinit var viewModelFactory: InListViewModelFactory
@@ -60,13 +59,7 @@ class CurrentListFragment : Fragment(), ItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.activeItemsRv.adapter = activeListAdapter
-        binding.deletedItemsRv.adapter = deletedListAdapter
-
-        currentListViewModel.state.observe(viewLifecycleOwner) {
-            activeListAdapter.listItems = it.items.filter { items-> items.isEnabled }.toMutableList()
-            deletedListAdapter.listItems = it.items.filter { items-> !items.isEnabled }.toMutableList()
-        }
+        setupRecyclerView()
 
         binding.addItemBtn.setOnClickListener {
             showEditText()
@@ -80,6 +73,28 @@ class CurrentListFragment : Fragment(), ItemClickListener {
                 hideKeyboard()
             }
             true
+        }
+    }
+
+    private fun setupRecyclerView() {
+        activeCurrentListAdapter= CurrentListAdapter()
+        deletedCurrentListAdapter = CurrentListAdapter()
+
+        binding.activeItemsRv.adapter = activeCurrentListAdapter
+        binding.deletedItemsRv.adapter = deletedCurrentListAdapter
+
+        currentListViewModel.state.observe(viewLifecycleOwner) {
+            activeCurrentListAdapter.submitList(it.items.filter { items -> items.isEnabled }
+                .toMutableList())
+            deletedCurrentListAdapter.submitList(it.items.filter { items -> !items.isEnabled }
+                .toMutableList())
+
+            activeCurrentListAdapter.onClick={
+                onClick(it)
+            }
+            deletedCurrentListAdapter.onClick={
+                onClick(it)
+            }
         }
     }
 
@@ -123,8 +138,8 @@ class CurrentListFragment : Fragment(), ItemClickListener {
         _binding = null
     }
 
-    override fun onClick(listItem: ListItem) {
-        if (activeListAdapter.listItems.contains(listItem))
+    fun onClick(listItem: ListItem) {
+        if (activeCurrentListAdapter.currentList.contains(listItem))
             currentListViewModel.deleteItem(listItem.id)
         else currentListViewModel.restoreItem(listItem.id)
     }
