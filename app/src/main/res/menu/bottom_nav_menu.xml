@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/navigation_current_list"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/ic_current_list"
         android:title="@string/title_current_list" />
 
     <item
