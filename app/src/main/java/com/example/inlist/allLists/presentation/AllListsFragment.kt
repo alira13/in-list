@@ -1,4 +1,4 @@
-package com.example.inlist.currentList.presentation
+package com.example.inlist.allLists.presentation
 
 import android.content.Context
 import android.os.Bundle
@@ -13,29 +13,29 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.inlist.app.App
-import com.example.inlist.currentList.domain.models.ListItem
-import com.example.inlist.databinding.FragmentCurrentListBinding
+import com.example.inlist.currentList.domain.models.CurrentList
+import com.example.inlist.currentList.presentation.InListViewModelFactory
+import com.example.inlist.databinding.FragmentAllListsBinding
 import javax.inject.Inject
 
+class AllListsFragment : Fragment() {
 
-class CurrentListFragment : Fragment() {
-
-    private var _binding: FragmentCurrentListBinding? = null
-
-    private lateinit var activeCurrentListAdapter:CurrentListAdapter
-
-    @Inject
-    lateinit var viewModelFactory: InListViewModelFactory
-
-    lateinit var currentListViewModel: CurrentListViewModel
-
-    private val component by lazy {
-        (requireActivity().application as App).component
-    }
+    private var _binding: FragmentAllListsBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    private lateinit var activeCurrentListAdapter: AllListsAdapter
+
+    @Inject
+    lateinit var viewModelFactory: InListViewModelFactory
+
+    lateinit var viewModel: AllListsViewModel
+
+    val component by lazy {
+        (requireActivity().application as App).component
+    }
 
     override fun onAttach(context: Context) {
         component.inject(this)
@@ -47,13 +47,16 @@ class CurrentListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentCurrentListBinding.inflate(inflater, container, false)
-        currentListViewModel =
-            ViewModelProvider(this, viewModelFactory).get(CurrentListViewModel::class.java)
-        Log.d("MY_LOG", "$currentListViewModel")
-        return binding.root
-    }
 
+        _binding = FragmentAllListsBinding.inflate(inflater, container, false)
+        val root: View = binding.root
+
+        this.viewModel =
+            ViewModelProvider(this, viewModelFactory).get(AllListsViewModel::class.java)
+        Log.d("MY_LOG", "${this.viewModel}")
+
+        return root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -68,7 +71,7 @@ class CurrentListFragment : Fragment() {
         binding.addItemEt.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 val name = binding.addItemEt.text.toString()
-                currentListViewModel.addItem(name)
+                viewModel.addItem(name)
                 hideKeyboard()
             }
             true
@@ -76,19 +79,15 @@ class CurrentListFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        activeCurrentListAdapter= CurrentListAdapter()
+        activeCurrentListAdapter = AllListsAdapter()
 
         binding.activeItemsRv.adapter = activeCurrentListAdapter
 
-        currentListViewModel.state.observe(viewLifecycleOwner) {
-            activeCurrentListAdapter.submitList(
-                it.items
-                .toMutableList())
-
-            activeCurrentListAdapter.onClick={
+        viewModel.state.observe(viewLifecycleOwner) {
+            activeCurrentListAdapter.submitList(it)
+            activeCurrentListAdapter.onClick = {
                 onClick(it)
             }
-
         }
     }
 
@@ -127,14 +126,14 @@ class CurrentListFragment : Fragment() {
         binding.addItemEt.setText("")
     }
 
+    fun onClick(listItem: CurrentList) {
+        if (activeCurrentListAdapter.currentList.contains(listItem))
+            viewModel.deleteItem(listItem.id)
+        else viewModel.restoreItem(listItem.id)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    fun onClick(listItem: ListItem) {
-        if (activeCurrentListAdapter.currentList.contains(listItem))
-            currentListViewModel.deleteItem(listItem.id)
-        else currentListViewModel.restoreItem(listItem.id)
     }
 }

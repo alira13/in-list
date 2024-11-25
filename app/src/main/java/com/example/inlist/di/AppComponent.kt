@@ -1,6 +1,7 @@
 package com.example.inlist.di
 
 import android.app.Application
+import com.example.inlist.allLists.presentation.AllListsFragment
 import com.example.inlist.currentList.presentation.CurrentListFragment
 import com.example.inlist.main.MainActivity
 import dagger.BindsInstance
@@ -12,6 +13,8 @@ interface AppComponent {
     fun inject(mainActivity: MainActivity)
 
     fun inject(currentListFragment: CurrentListFragment)
+
+    fun inject(allListsFragment: AllListsFragment)
 
     @Component.Factory
     interface Factory{

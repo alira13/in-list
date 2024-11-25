@@ -8,6 +8,7 @@ import com.example.inlist.currentList.domain.models.ListItem
 import com.example.inlist.currentList.domain.models.ListItem.Companion.UNDEFINED_ID
 import com.example.inlist.currentList.domain.usecases.CurrentListRepository
 import javax.inject.Inject
+import kotlin.random.Random
 
 class CurrentListRepositoryImpl @Inject constructor(
     val mapper: ItemsMapper,
@@ -16,17 +17,13 @@ class CurrentListRepositoryImpl @Inject constructor(
 ) : CurrentListRepository {
 
     private var currentList: CurrentList
-    private var itemId = 0;
+    private var itemId = 0
 
     init {
-        val items = mutableListOf(
-            ListItem("Молоко", true, itemId++),
-            ListItem("Чай",true, itemId++),
-            ListItem("Кофе",true, itemId++),
-            ListItem("Хлеб",true, itemId++),
-            ListItem("Шампунь", false,itemId++),
-            ListItem("Мыло", false,itemId++),
-        )
+        val items = mutableListOf<ListItem>()
+        for (i in 1..100){
+            items.add(ListItem("Элемент $i", Random.nextBoolean(), itemId++))
+        }
         currentList = CurrentList(items, "Мой список")
     }
 

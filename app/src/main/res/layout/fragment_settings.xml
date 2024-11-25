@@ -9,10 +9,17 @@
     tools:context=".settings.presentation.SettingsFragment">
 
     <TextView
+        style="@style/SettingsMenuTv"
+        android:text="@string/lbl_general"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:foreground="?attr/selectableItemBackground"/>
+
+    <TextView
         android:id="@+id/settings_account_tv"
         style="@style/SettingsMenuTv"
         android:text="@string/lbl_account_settings"
-        app:drawableEndCompat="@drawable/ic_settings"
+        app:drawableEndCompat="@drawable/ic_user"
         android:foreground="?attr/selectableItemBackground"/>
 
     <LinearLayout
@@ -35,8 +42,16 @@
             android:layout_gravity="center_vertical"
             android:checked="true"
             app:thumbTint="?attr/colorPrimary"
-            app:trackTint="?attr/colorPrimary" />
+            app:trackTint="?attr/colorSecondary" />
     </LinearLayout>
+
+
+    <TextView
+        style="@style/SettingsMenuTv"
+        android:text="@string/lbl_help_amp_support"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:foreground="?attr/selectableItemBackground"/>
 
 
     <TextView

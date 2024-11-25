@@ -10,4 +10,6 @@
     <string name="lbl_share_app">Share App</string>
     <string name="lbl_about_app">About</string>
     <string name="btn_new_list">New List</string>
+    <string name="lbl_general">General</string>
+    <string name="lbl_help_amp_support"><![CDATA[Help & Support]]></string>
 </resources>

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_all_lists"
-        android:name="com.example.inlist.allLists.AllListsFragment"
+        android:name="com.example.inlist.allLists.presentation.AllListsFragment"
         android:label="@string/title_all_lists"
         tools:layout="@layout/fragment_all_lists" />
 

@@ -10,4 +10,6 @@
     <string name="lbl_share_app">Поделиться приложением</string>
     <string name="lbl_about_app">О приложении</string>
     <string name="btn_new_list">Новый список</string>
+    <string name="lbl_general">Общие</string>
+    <string name="lbl_help_amp_support">Другое</string>
 </resources>
