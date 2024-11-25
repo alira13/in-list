@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginVertical="8dp"
         tools:text="Список"
-        app:drawableStartCompat="@drawable/ic_dashboard_black_24dp"
+        app:drawableStartCompat="@drawable/ic_list"
         android:gravity="start|center_vertical"
         android:drawablePadding="4dp"/>
 </LinearLayout>
