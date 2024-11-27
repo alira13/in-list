@@ -5,21 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
     tools:context=".settings.presentation.SettingsFragment">
 
     <TextView
-        style="@style/SettingsMenuTv"
+        style="@style/SettingsLargeLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/lbl_general"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:foreground="?attr/selectableItemBackground"/>
-
-    <TextView
-        android:id="@+id/settings_account_tv"
-        style="@style/SettingsMenuTv"
-        android:text="@string/lbl_account_settings"
-        app:drawableEndCompat="@drawable/ic_user"
+        android:gravity="center|start"
         android:foreground="?attr/selectableItemBackground"/>
 
     <LinearLayout
@@ -30,11 +23,11 @@
 
         <TextView
             android:id="@+id/settings_theme_tv"
+            style="@style/SettingsSmallLabel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/lbl_dark_theme"
-            android:textSize="16sp" />
+            android:text="@string/lbl_dark_theme" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:layout_width="wrap_content"
@@ -47,28 +40,51 @@
 
 
     <TextView
-        style="@style/SettingsMenuTv"
+        android:id="@+id/settings_account_tv"
+        style="@style/SettingsSmallLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?attr/selectableItemBackground"
+        android:text="@string/lbl_account_settings"
+        app:drawableEndCompat="@drawable/ic_arrow_forward" />
+
+    <TextView
+        style="@style/SettingsLargeLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/lbl_help_amp_support"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:foreground="?attr/selectableItemBackground"/>
-
+        android:foreground="?attr/selectableItemBackground" />
 
     <TextView
+        android:id="@+id/settings_help_tv"
+        style="@style/SettingsSmallLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/lbl_help"
+        app:drawableEndCompat="@drawable/ic_arrow_forward" />
+
+    <TextView
+        style="@style/SettingsSmallLabel"
+        android:layout_width="match_parent"
         android:id="@+id/settings_support_tv"
-        style="@style/SettingsMenuTv"
+        android:layout_height="wrap_content"
         android:text="@string/lbl_support"
-        app:drawableEndCompat="@drawable/ic_support" />
+        app:drawableEndCompat="@drawable/ic_arrow_forward" />
 
     <TextView
+        style="@style/SettingsSmallLabel"
+        android:layout_width="match_parent"
         android:id="@+id/settings_share"
-        style="@style/SettingsMenuTv"
+        android:layout_height="wrap_content"
         android:text="@string/lbl_share_app"
-        app:drawableEndCompat="@drawable/ic_share" />
+        app:drawableEndCompat="@drawable/ic_arrow_forward" />
+
 
     <TextView
+        style="@style/SettingsSmallLabel"
+        android:layout_width="match_parent"
         android:id="@+id/settings_about_tv"
-        style="@style/SettingsMenuTv"
+        android:layout_height="wrap_content"
         android:text="@string/lbl_about_app"
         app:drawableEndCompat="@drawable/ic_arrow_forward" />
 </LinearLayout>

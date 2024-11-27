@@ -12,4 +12,5 @@
     <string name="btn_new_list">Новый список</string>
     <string name="lbl_general">Общие</string>
     <string name="lbl_help_amp_support">Другое</string>
+    <string name="lbl_help">Помощь</string>
 </resources>
