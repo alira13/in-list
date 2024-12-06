@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
 import com.example.inlist.app.App
 import com.example.inlist.currentList.domain.models.ListItem
 import com.example.inlist.databinding.FragmentCurrentListBinding
@@ -42,6 +41,7 @@ class CurrentListFragment : Fragment() {
         component.inject(this)
         super.onAttach(context)
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
