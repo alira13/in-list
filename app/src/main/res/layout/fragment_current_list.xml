@@ -18,10 +18,10 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/add_item_btn"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/add_item_btn"
         app:layout_constraintVertical_bias="0.0"
         tools:itemCount="10"
 
@@ -29,24 +29,29 @@
 
     <EditText
         android:id="@+id/add_item_et"
-        android:labelFor="@+id/add_item_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textCapSentences"
-        android:maxLines="1"
         android:autofillHints="name"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:visibility="gone"
         android:imeOptions="actionDone"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:inputType="textCapSentences"
+        android:labelFor="@+id/add_item_et"
+        android:maxLines="1"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <Button
         android:id="@+id/add_item_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_add"
-        app:layout_constraintTop_toBottomOf="@id/active_items_rv"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/desc_add_new_list_item_button"
+        android:foreground="@drawable/ic_plus_symbol"
+        android:foregroundGravity="center"
+        app:cornerRadius="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/active_items_rv"
+        app:layout_constraintHorizontal_bias="0.5"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

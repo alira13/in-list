@@ -44,12 +44,15 @@
     <Button
         android:id="@+id/add_item_btn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
+        android:layout_margin="16dp"
+        android:drawableEnd="@drawable/ic_plus_symbol"
         android:text="@string/btn_new_list"
-        app:layout_constraintTop_toBottomOf="@id/active_items_rv"
+        android:textAllCaps="false"
+        app:cornerRadius="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:textAllCaps="false"/>
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/active_items_rv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
