@@ -40,7 +40,7 @@ class CurrentListRepositoryImpl @Inject constructor(
 
     override fun addItem(item: ListItem) {
         if (item.id == UNDEFINED_ID) item.id = itemId++
-        currentList.items.add(item)
+        currentList.items.add(0, item)
     }
 
     override fun restoreItem(id: Int) {
